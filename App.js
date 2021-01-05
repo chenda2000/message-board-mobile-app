@@ -1,21 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
+
+import Login from './components/Login';
+import Feed from './components/Feed';
 
 export default function App() {
+  const [name, setName] = useState(null)
+
+  function enter(nickname) {
+    if (nickname !== "") setName(nickname)
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    name === null ?
+    <Login updateName={enter}/> :
+    <Feed nickname={name} updateName={enter}/>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
